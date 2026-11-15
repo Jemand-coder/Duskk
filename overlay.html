@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Duskk overlay</title>
+<style>
+  :root { --acc: #9b8c6e; --ok: #4cb782; --bad: #e5484d; }
+  html, body { margin: 0; background: transparent; font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; color: #ededee; overflow: hidden; user-select: none; }
+  svg { width: 16px; height: 16px; }
+  .av { border-radius: 50%; object-fit: cover; flex: none; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: 13px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 6px var(--ok); flex: none; }
+  .t { font-style: normal; margin-left: auto; color: #8b8b92; font-variant-numeric: tabular-nums; font-size: 12px; }
+  /* Overlay */
+  .ov { display: flex; flex-direction: column; gap: 4px; padding: 6px; }
+  .ov-head { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; padding: 5px 9px; border-radius: 9px; background: rgba(11,11,12,.72); width: fit-content; max-width: 280px; }
+  .ov-head .t { margin-left: 6px; }
+  .ov-p { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px; border-radius: 22px; background: rgba(11,11,12,.6); width: fit-content; max-width: 290px; font-size: 13.5px; font-weight: 600; opacity: .72; transition: opacity .2s, background .2s; text-shadow: 0 1px 2px #000; }
+  .ov-p .av { box-shadow: 0 0 0 2px transparent; transition: box-shadow .15s; }
+  .ov-p.on { opacity: 1; background: rgba(11,11,12,.82); }
+  .ov-p.on .av { box-shadow: 0 0 0 2px #111, 0 0 0 4px var(--ok), 0 0 12px var(--ok); }
+  .ov-p span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ov-p .m { color: var(--bad); display: grid; }
+  .ov-p .m svg { width: 14px; height: 14px; }
+  .ov-me { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; font-weight: 600; color: #fff; background: rgba(229,72,77,.85); padding: 4px 10px; border-radius: 9px; width: fit-content; }
+  .ov-fly { position: fixed; left: 12px; bottom: 12px; font-size: 22px; font-weight: 600; text-shadow: 0 1px 3px #000; animation: fly 2.4s ease-out forwards; }
+  @keyframes fly { 0% { opacity: 0; transform: translateY(10px) scale(.7); } 15% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-160px); } }
+  /* Mini */
+  .mini { position: fixed; inset: 0; display: flex; flex-direction: column; background: #111113; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; overflow: hidden; }
+  .mini.empty { align-items: center; justify-content: center; color: #8b8b92; }
+  .mini.empty .x { position: absolute; right: 8px; top: 8px; }
+  .mini-top { display: flex; align-items: center; gap: 8px; padding: 10px 10px 6px 12px; font-size: 13px; }
+  .mini-top b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .x { width: 26px; height: 26px; border-radius: 7px; border: 0; background: transparent; color: #8b8b92; display: grid; place-items: center; cursor: pointer; }
+  .x:hover { background: rgba(255,255,255,.07); color: #fff; }
+  .mini-people { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 4px 10px; }
+  .mp { position: relative; }
+  .mp .av { box-shadow: 0 0 0 2px #111113; transition: box-shadow .15s; }
+  .mp.on .av { box-shadow: 0 0 0 2px #111113, 0 0 0 4px var(--ok); }
+  .mp i { position: absolute; right: -3px; bottom: -3px; width: 18px; height: 18px; border-radius: 50%; background: var(--bad); display: grid; place-items: center; }
+  .mp i svg { width: 11px; height: 11px; }
+  .more { color: #8b8b92; font-size: 12px; }
+  .mini-ctrls { display: flex; justify-content: center; gap: 8px; padding: 8px 10px 12px; }
+  .mini-ctrls button { width: 42px; height: 36px; border-radius: 10px; border: 0; background: #1d1d20; color: #ededee; display: grid; place-items: center; cursor: pointer; transition: background .15s, transform .12s; }
+  .mini-ctrls button:hover { background: #27272b; }
+  .mini-ctrls button:active { transform: scale(.92); }
+  .mini-ctrls button.off { color: var(--bad); }
+  .mini-ctrls button.red { background: var(--bad); color: #fff; }
+</style></head>
+<body data-mode="overlay"><div id="root"></div><script src="js/companion-win.js"></script></body></html>
